@@ -13,3 +13,4 @@ const conn = async (req, res) => {
     }        
 };
 conn();
+export default conn ;

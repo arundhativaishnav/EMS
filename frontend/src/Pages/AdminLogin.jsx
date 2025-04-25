@@ -1,31 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/api/auth/login" , {
-                email, password
+            const response = await axios.post("http://localhost:3000/api/auth/AdminLogin", {
+                email, 
+                password
+            });
+
+            if (response.data.success) {
+                toast.success("Successfully Logged In");
+            } else {
+                setError("Login failed. Please check your credentials.");
             }
-        );
-        console.log(response);
-            
         } catch (error) {
             console.error('Login failed:', error);
+            setError("An error occurred. Please try again.");
         }
-
     }
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-600 to-gray-100 space-y-6">
-            <h1 className="font-Pacific text-3xl text-white">Admin Login </h1>
+            <ToastContainer position="top-center" autoClose={3000} />
+            <h1 className="font-Pacific text-3xl text-white">Admin Login</h1>
             <div className="border shadow p-6 w-80 bg-white">
                 <h2 className="text-2xl font-bold mb-4">Login</h2>
-                <form onSubmit={ handleSubmit}>
+                {error && <p className='text-red-500'>{error}</p>}
+                <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-gray-700">Email</label>
                         <input 
