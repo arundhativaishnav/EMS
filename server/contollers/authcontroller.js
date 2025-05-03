@@ -3,7 +3,7 @@ import User from '../Models/User.js'
 import bcrypt from 'bcrypt';
 
 
-const AdminLogin = async (req , res ) =>{
+const Login = async (req , res ) =>{
     try {
         const {email,password } = req.body;
         const existingUser = await User.findOne({email});
@@ -27,8 +27,21 @@ const AdminLogin = async (req , res ) =>{
         });
 
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            success: false ,
+            error :error.message
+        })
     }
 
 }
-export {AdminLogin};
+export const verify = (req, res) => {
+    //console.log("✅ Inside verify controller");
+    res.status(200).json({
+        success: true,
+        message: "User verified successfully",
+        User: req.user // assuming `authmiddleware` adds this
+    });
+};
+
+
+export {Login };

@@ -1,31 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { UseAuth } from '../context/authcontext';
+import {useNavigate } from 'react-router-dom';
 const Login = () => {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const {login} = UseAuth()
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/api/auth/login" , {
-                email, password
+            const response = await axios.post("http://localhost:5000/api/auth/Login", {
+                email: email.trim(), // Trim spaces
+                password: password.trim() // Trim spaces
+            });
+    
+            console.log(response.data); // Log the response for debugging
+    
+            if (response.data.success) {
+                console.log(response.data);
+                const user = response.data.User;
+                console.log(user);
+                console.log(user.role);
+                if (user) {
+                    login(user);
+                    localStorage.setItem("token", response.data.token);
+                    if (user.role === "admin") {
+                        navigate('/AdminDashboard');
+                    } else {
+                        navigate('/EmployeeDashboard');
+                    }
+
+                    toast.success("Successfully Logged In");
+                } else {
+                    setError("User  data is missing.");
+                }
+            } else {
+                setError("Login failed. Please check your credentials.");
             }
-        );
-        console.log(response);
-            
         } catch (error) {
             console.error('Login failed:', error);
+            setError("An error occurred. Please try again.");
         }
-
     }
+    
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-600 to-gray-100 space-y-5">
-            <h1 className="font-Pacific text-3xl text-white">Employee Login</h1>
+        <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-600 to-gray-100 space-y-6">
+            <ToastContainer position="top-right" autoClose={3000} />
+            <h1 className="font-Pacific text-3xl text-white">Login</h1>
             <div className="border shadow p-6 w-80 bg-white">
                 <h2 className="text-2xl font-bold mb-4">Login</h2>
-                <form onSubmit={ handleSubmit}>
+                {error && <p className='text-red-500'>{error}</p>}
+                <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-gray-700">Email</label>
                         <input 

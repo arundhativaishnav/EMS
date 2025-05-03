@@ -13,8 +13,8 @@ function Navbar() {
         {/* Navigation Links */}
         <div className="space-x-6 flex items-center">
           <Link to="/" className="hover:text-blue-400">Home</Link>
-          <Link to="/admin-login" className="hover:text-blue-400">Admin Login</Link>
-          <Link to="/employee-login" className="hover:text-blue-400">Employee Login</Link>
+          <Link to="/login" className="hover:text-blue-400">Login</Link>
+          
         </div>
       </div>
     </nav>
