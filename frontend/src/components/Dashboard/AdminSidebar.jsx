@@ -4,7 +4,7 @@ import { FaBuilding, FaCalendar, FaCogs, FaMoneyBillAlt, FaTachometerAlt, FaUser
 
 const AdminSidebar = () => {
     const linkClasses = ({ isActive }) =>
-        `${isActive ? 'bg-blue-500' : ''} flex items-center space-x-4 block py-2.5 px-4 rounded hover:bg-blue-400 transition`;
+        `${isActive ? 'bg-blue-500' : ''} flex items-center space-x-4 block py-2.5 px-4 rounded hover:bg-blue-400 transition  `;
 
     return (
         <div className='bg-black text-white h-screen fixed left-0 top-0 w-64 space-y-2'>
@@ -13,7 +13,7 @@ const AdminSidebar = () => {
                 {/* Replace with font-Pacific if you've defined it in tailwind.config.js */}
             </div>
             <div className='px-4 py-2 space-y-2'>
-                <NavLink to="/AdminDashboard" className={linkClasses}>
+                <NavLink to="/AdminDashboard" end className={linkClasses}>
                     <FaTachometerAlt />
                     <span>Dashboard</span>
                 </NavLink>

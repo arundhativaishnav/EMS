@@ -1,20 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';  // Adjust path if needed
-import Home from './Pages/Home'
-import Login from './Pages/Login'; 
-import AdminDashboard from './Pages/Admin-dashboard'
+import Navbar from './components/Navbar';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import AdminDashboard from './Pages/Admin-dashboard';
 import EmployeeDashboard from './Pages/Employee-dashboard';
 import PrivateRoutes from '../utils/PrivateRoutes.JSX';
 import RolebasedRoutes from '../utils/RolebasedRoutes.jsx';
 import AdminSummary from './components/Dashboard/AdminSummary.jsx';
-import DepartmentList from './components/Departments/DepartmentList.jsx';
- 
+import DepartmentList from './components/Department/DepartmentList';
+import AddDepartment from './components/Department/AddDepartment.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {EditDepartment} from './components/Department/EditDepartment.jsx';
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Public Route */}
         <Route
           path="/"
           element={
@@ -25,27 +29,32 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+
+        {/* ✅ Protected Admin Routes */}
         <Route
           path="/AdminDashboard"
           element={
             <PrivateRoutes>
-              <RolebasedRoutes requiredRole={['admin']}>
-                <AdminDashboard />
-              </RolebasedRoutes>
+              <RolebasedRoutes requiredRole={['admin']} />
             </PrivateRoutes>
-          }>
-            <Route index element={<AdminSummary/>}></Route>
-            <Route path="/AdminDashboard/departments" element={<DepartmentList/>}></Route>
-
+          }
+        >
+          {/* ✅ Layout with Sidebar */}
+          <Route element={<AdminDashboard />}>
+            <Route index element={<AdminSummary />} />
+            <Route path="departments" element={<DepartmentList />} />
+            <Route path="add-department" element={<AddDepartment />} />
+            <Route path="edit-department/:id" element={< EditDepartment />} />
 
           </Route>
-        
+        </Route>
 
-        <Route path="/EmployeeDashboard" element={<EmployeeDashboard />}></Route> 
+        {/* Employee route */}
+        <Route path="/EmployeeDashboard" element={<EmployeeDashboard />} />
       </Routes>
+      <ToastContainer />
     </Router>
   );
 }
-
 
 export default App;

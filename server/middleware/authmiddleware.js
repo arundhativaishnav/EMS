@@ -3,7 +3,7 @@ import User from '../Models/User.js';
 
 const verifyUser = async (req, res, next) => {
   try {
-    const authHeader = req.headers['Authorization'];
+    const authHeader = req.headers['authorization'];
     //console.log("auth header:", authHeader);
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -13,7 +13,7 @@ const verifyUser = async (req, res, next) => {
       });
     }
 
-    const token = req.headers.Authorization.split(' ')[1];
+    const token = authHeader.split(' ')[1];
     console.log("Extracted token:", token);
 
     const decoded = jwt.verify(token, process.env.JWT_KEY);
