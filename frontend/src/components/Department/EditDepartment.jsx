@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const EditDepartment = () => {
@@ -13,12 +15,40 @@ const EditDepartment = () => {
         const { name, value } = e.target;
         setDepartment({ ...department, [name]: value });
     }
+    const navigate = useNavigate();
+    const handleSubmit = async (e) =>{
+      e.preventDefault();
+      try {
+        const response = await axios.put(
+          `http://localhost:5000/api/department/${id}`,
+          department,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
+  
+        if (response.data.success) {
+          toast.success(response.data.message, {
+              position: "top-right" 
+          });
+          navigate('/AdminDashboard/departments');
+        }
+      } catch (error) {
+        if (error.response) {
+          toast.error(error.response.data.message, {
+            position: "top-right",
+          });
+        }
+      }
+    }
 
 
 useEffect(() => {
         const fetchDepartment = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/department/department/${id}`, {
+                const response = await axios.get(`http://localhost:5000/api/department/${id}`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
                     }
@@ -39,6 +69,8 @@ useEffect(() => {
         };
         fetchDepartment();
 }, [id ]); // Fetch department data using the id
+
+
     return (
         <>{depLoading ? <div>Loading.....</div>
             :
@@ -46,7 +78,7 @@ useEffect(() => {
       <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">
         Edit Department
       </h3>
-      <form >
+      <form onSubmit = {handleSubmit} >
         <div className="mb-5">
           <label
             htmlFor="departmentName"
