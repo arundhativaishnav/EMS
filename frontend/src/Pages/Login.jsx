@@ -31,11 +31,12 @@ const Login = () => {
                     localStorage.setItem("token", response.data.token);
                     if (user.role === "admin") {
                         navigate('/AdminDashboard');
+                        toast.success("Successfully Logged In");
                     } else {
                         navigate('/EmployeeDashboard');
                     }
 
-                    toast.success("Successfully Logged In");
+                    
                 } else {
                     setError("User  data is missing.");
                 }

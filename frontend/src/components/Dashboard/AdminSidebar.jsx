@@ -17,7 +17,7 @@ const AdminSidebar = () => {
                     <FaTachometerAlt />
                     <span>Dashboard</span>
                 </NavLink>
-                <NavLink to="/admin/employees" className={linkClasses}>
+                <NavLink to="/AdminDashboard/employees" className={linkClasses}>
                     <FaUsers />
                     <span>Employees</span>
                 </NavLink>

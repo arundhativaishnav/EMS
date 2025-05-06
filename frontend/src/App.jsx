@@ -13,6 +13,8 @@ import AddDepartment from './components/Department/AddDepartment.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {EditDepartment} from './components/Department/EditDepartment.jsx';
+import EmployeeList from './components/Employee/employeeList.jsx';
+import AddEmployee from './components/Employee/AddEmployee.jsx';
 
 function App() {
   return (
@@ -45,6 +47,9 @@ function App() {
             <Route path="departments" element={<DepartmentList />} />
             <Route path="add-department" element={<AddDepartment />} />
             <Route path="edit-department/:id" element={< EditDepartment />} />
+            <Route path="employees" element={<EmployeeList />} />
+            <Route path="add-Employee" element={<AddEmployee />} />
+
 
           </Route>
         </Route>

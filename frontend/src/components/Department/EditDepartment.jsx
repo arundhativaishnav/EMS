@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -29,7 +30,7 @@ const EditDepartment = () => {
           }
         );
   
-        if (response.data.success) {
+        if(response.data.success) {
           toast.success(response.data.message, {
               position: "top-right" 
           });
@@ -53,7 +54,7 @@ useEffect(() => {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                console.log(response.data); // Log the response for debugging
+                 
 
                 if (response.data.status === 'success') {
                     setDepartment(response.data.department);

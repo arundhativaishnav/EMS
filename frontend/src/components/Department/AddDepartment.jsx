@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-// 🚨 DO NOT put ToastContainer here. Render <ToastContainer /> once in App.jsx.
 
 const AddDepartment = () => {
   const [department, setDepartment] = useState({
