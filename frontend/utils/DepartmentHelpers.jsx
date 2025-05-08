@@ -38,7 +38,7 @@ const DepartmentButtons = ({ dep_id, onDepartmentDelete, fetchDepartments }) => 
                     }
                 );
 
-                if (response.data.success) {
+                if (response?.data?.message) {
                     onDepartmentDelete(id);
                     toast.success(response.data.message, {
                         position: "top-right",

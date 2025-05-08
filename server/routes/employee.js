@@ -1,6 +1,6 @@
 import express from 'express';
 import authmiddleware from '../middleware/authmiddleware.js';
-import { addemployee } from '../contollers/employeecontroller.js';
+import { addEmployee , getEmployee } from '../contollers/employeecontroller.js';
 import multer from 'multer';
 import path from 'path';
 
@@ -19,6 +19,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Corrected route
-router.post('/add', authmiddleware, upload.single('image'), addemployee);
+router.post('/add', authmiddleware, upload.single('image'), addEmployee);
+router.get('/', authmiddleware, getEmployee);
+
 
 export default router;

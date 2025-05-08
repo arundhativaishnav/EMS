@@ -2,7 +2,11 @@ import mongoose from 'mongoose';
 import {Schema} from 'mongoose';
 
 const EmployeeSchema = new mongoose.Schema({
-    
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     employeeId: {
         type: String,
         required: true,
@@ -14,12 +18,10 @@ const EmployeeSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        
         required: true
     },
     maritalStatus: {
         type: String,
-        
         required: true
     },
     designation: {

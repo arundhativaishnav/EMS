@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { fetchDepartments } from '../../../utils/EmployeeHelper';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { fetchDepartments } from '../../../utils/EmployeeHelper';
+
+
 
 const AddEmployee = () => {
     const [departments, setDepartments] = useState([]);
@@ -20,6 +24,11 @@ const AddEmployee = () => {
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("");
     const [image, setImage] = useState(null);
+    
+    
+    
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getDepartments = async () => {
@@ -61,14 +70,13 @@ const AddEmployee = () => {
             );
             console.log(response.data);
     
-            if (response.data.success) {
-                toast.success(response.data.message, {
-                    position: "top-right" 
-                });
+            if (response?.data?.message) {
+                console.log(response.data.message);
                 navigate('/AdminDashboard/employees');
-            }
+              }
+              
         } catch (error) {
-            if (error.response) {
+            if(error.response) {
                 toast.error(error.response.data.message, {
                     position: "top-right",
                 });

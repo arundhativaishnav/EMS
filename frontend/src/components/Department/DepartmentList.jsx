@@ -69,9 +69,9 @@ const DepartmentList = () => {
     return (
         <div className='p-5'>
             <div className='text-center'>
-                <h3 className='text-2xl font-bold'>Manage Departments</h3>
+                <h3 className='text-3xl font-bold'>Manage Departments</h3>
             </div>
-            <div className='flex justify-between items-center my-4'>
+            <div className='flex justify-between items-center my-2'>
                 <input 
                     type="text" 
                     placeholder="Search department here" 
@@ -85,16 +85,22 @@ const DepartmentList = () => {
                     Add New Department
                 </Link>
             </div>
-            <div className='mt-5 border rounded overflow-hidden'>
-                <DataTable
+            <div className="p-6">
+                <div className="bg-white rounded-2xl shadow-lg p-6">
+                    
+                    <DataTable
                     columns={columns}
                     data={filteredDepartments}
                     pagination
                     progressPending={loading}
-                    noDataComponent={<div className='p-4 text-center'>No departments found</div>}
+                    noDataComponent={
+                        <div className="p-4 text-center text-gray-500">No departments found</div>
+                    }
                     highlightOnHover
-                />
+                    />
+                </div>
             </div>
+
         </div>
     );
 };

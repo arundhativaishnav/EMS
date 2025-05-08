@@ -2,11 +2,14 @@ import Employee from "../Models/Employee.js";
 import User from "../Models/User.js";
 import bcrypt from "bcrypt";
 
-// No need for multer here anymore
 
-const addemployee = async (req, res) => {
-    try {
+
+
+
+    const addEmployee = async (req, res) => {
+        try {
         const {
+            
             name,
             email,
             employeeId,
@@ -17,51 +20,53 @@ const addemployee = async (req, res) => {
             department,
             salary,
             password,
-            role
+            role,
+            image,
         } = req.body;
-        console.log("Request body:", req.body);
-        const existingUser = await Employee.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({
-                success: false,
-                message: "User already exists in employee",
-            });
+
+        const user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ message: "User already exists" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        
-
-        const newEmployee = new Employee({
+        const newUser = new User({
             name,
             email,
             password: hashedPassword,
             role,
-            profileImage: req.file ? req.file.filename : "",
+            profileImage: req.file.filename,
+        });
+        const savedUser = await newUser.save();
+
+        const newEmployee = new Employee({
+            userId : savedUser._id,
             employeeId,
             dob,
             gender,
             maritalStatus,
             designation,
-            department,
+            department: department, 
             salary,
         });
-
         await newEmployee.save();
-
-        return res.status(201).json({
-            success: true,
-            message: "Employee added successfully",
-            employee: newEmployee,
-        });
-
+        return res.status(201).json({ message: "Employee added successfully" });
+        }
+        catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal server error" });
+            
+        }
+    
+} 
+const getEmployee = async (req, res) => {
+    try {
+        const employees = await Employee.find().populate('userId', 'name email image').populate('department', 'departmentName').sort({ createdAt: -1 });
+        return res.status(200).json({success: true, employees });
     } catch (error) {
-        console.error("Error adding employee:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error",
-        });
+        console.error(error);
+        return res.status(500).json({ message: "getemployee server error" });
     }
-};
+}
 
-export { addemployee };
+export { addEmployee , getEmployee };
