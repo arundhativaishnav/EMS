@@ -21,6 +21,7 @@ const EmployeeList = () => {
                 }
             });
             console.log(response.data);
+            
             if (response.data.success) {
                 let SrNo = 1;
                 const info = response.data.employees.map((employee) => ({
@@ -29,13 +30,17 @@ const EmployeeList = () => {
                     dep_Name: employee.department ? employee.department.departmentName : 'N/A',
                     Name: employee.userId ? employee.userId.name : 'N/A',
                     designation: employee.designation,
-                    profileImage:  
-                    <img src={`http://localhost:5000/${employee.userId.profileImage}`} alt="Profile" className='w-10 h-10 rounded-full'  />,
-                    
-
-                    
+                
+                    profileImage:
+                   <img
+                    src={`http://localhost:5000/uploads/${employee.userId.profileImage || 'default-profile.png'}`}
+                    alt="Profile"
+                    className="w-10 h-10 rounded-full"
+                    />,
                     action: <EmployeeButtons Id={employee._id} />,
                   }));
+                console.log(info);
+
                   
                 setEmployees(info);
                 
@@ -56,27 +61,44 @@ const EmployeeList = () => {
     } , []);
 
     return (
-        <div className='p-6'>
-             <div className='text-center'>
-                <h3 className='text-2xl font-bold'>Manage Employees</h3>
-            </div>
-            <div className='flex justify-between items-center my-4'>
-                <input type="text" placeholder="Search department here" className='px-4 py-0.5 border' 
-                
-                />
-                <Link to="/AdminDashboard/add-Employee" className='px-4 py-1 bg-blue-600 rounded text-white'>Add New Employee</Link>
-            </div>  
-            <div>
-                <DataTable
-                    columns={columns}
-                    data={Employees}
-                    pagination
-                   
-                    
-                />
+       <div className="p-5">
+  {/* Header */}
+  <div className="text-center mb-6">
+    <h3 className="text-3xl font-bold text-gray-800">Manage Employees</h3>
+  </div>
 
-            </div>
-        </div>
+  {/* Search + Add Button */}
+  <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+    <input
+      type="text"
+      placeholder="Search employee here"
+      className="px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-1/2"
+       // Make sure this function is defined
+    />
+    <Link
+      to="/AdminDashboard/add-Employee"
+      className="px-4 py-2 bg-blue-600 rounded text-white hover:bg-blue-700 transition-colors text-center w-full sm:w-auto"
+    >
+      Add New Employee
+    </Link>
+  </div>
+
+  {/* Data Table */}
+  <div className="bg-white rounded-2xl shadow-lg p-6 overflow-x-auto">
+    <DataTable
+      columns={columns}
+      data={Employees}
+      pagination
+      responsive
+      highlightOnHover
+      noDataComponent={
+        <div className="p-4 text-center text-gray-500">No employees found</div>
+      }
+    />
+  </div>
+</div>
+
+
     );
 };
 

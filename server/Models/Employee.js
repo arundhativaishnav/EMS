@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import {Schema} from 'mongoose';
 
 const EmployeeSchema = new mongoose.Schema({
+    
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -37,6 +38,7 @@ const EmployeeSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    
     createdAt: {
         type: Date,
         default: Date.now
@@ -47,5 +49,5 @@ const EmployeeSchema = new mongoose.Schema({
     }
 });
 
-const Employee = mongoose.model('Employee', EmployeeSchema);
+const Employee = mongoose.models.Employee || mongoose.model('Employee', EmployeeSchema);
 export default Employee;

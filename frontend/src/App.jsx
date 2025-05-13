@@ -12,9 +12,18 @@ import DepartmentList from './components/Department/DepartmentList';
 import AddDepartment from './components/Department/AddDepartment.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {EditDepartment} from './components/Department/EditDepartment.jsx';
+import { EditDepartment } from './components/Department/EditDepartment.jsx';
 import EmployeeList from './components/Employee/employeeList.jsx';
 import AddEmployee from './components/Employee/AddEmployee.jsx';
+import ViewEmployee from './components/Employee/Viewemployee.jsx';
+import EditEmployee from './components/Employee/EditEmployee.jsx';
+import AddSalary from './components/salary/AddSalary.jsx';
+import ViewSalary from './components/salary/ViewSalary.jsx';
+import SummaryCard from './components/EmployeeDashboard/SummaryCard.jsx';
+import LeaveList from './components/Leave/LeaveList.jsx';
+import AddLeave from './components/Leave/AddLeave.jsx';
+import Setting from './components/EmployeeDashboard/Setting.jsx';
+import LeaveTable from './components/Leave/LeaveTable.jsx';
 
 function App() {
   return (
@@ -41,22 +50,44 @@ function App() {
             </PrivateRoutes>
           }
         >
-          {/* ✅ Layout with Sidebar */}
           <Route element={<AdminDashboard />}>
             <Route index element={<AdminSummary />} />
             <Route path="departments" element={<DepartmentList />} />
             <Route path="add-department" element={<AddDepartment />} />
-            <Route path="edit-department/:id" element={< EditDepartment />} />
+            <Route path="edit-department/:id" element={<EditDepartment />} />
             <Route path="employees" element={<EmployeeList />} />
             <Route path="add-Employee" element={<AddEmployee />} />
-
-
+            <Route path="employees/:id" element={<ViewEmployee />} />
+            <Route path="employees/edit/:id" element={<EditEmployee />} />
+            <Route path="employees/salary/:id" element={<ViewSalary />} />
+            <Route path="salary/add" element={<AddSalary />} />
+            <Route path="leaves" element={< LeaveTable />}/>
           </Route>
         </Route>
 
-        {/* Employee route */}
-        <Route path="/EmployeeDashboard" element={<EmployeeDashboard />} />
+        {/* ✅ Protected Employee Routes */}
+        <Route
+          path="/EmployeeDashboard"
+          element={
+            <PrivateRoutes>
+              <RolebasedRoutes requiredRole={['Employee']} />
+            </PrivateRoutes>
+          }
+        >
+            <Route element={<EmployeeDashboard/>}>
+            <Route index element={<SummaryCard />} />
+            <Route path="profile/:id" element={<ViewEmployee />} />
+            <Route path="leaves" element={<LeaveList/>}/>
+            <Route path="add-Leave" element={<AddLeave/>}/>
+            <Route path="salary/:id" element={<ViewSalary/>}/>
+            <Route path="settings" element={< Setting/>}/>
+
+
+            </Route>
+          
+        </Route>
       </Routes>
+
       <ToastContainer />
     </Router>
   );

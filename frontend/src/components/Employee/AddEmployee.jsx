@@ -71,6 +71,9 @@ const AddEmployee = () => {
             console.log(response.data);
     
             if (response?.data?.message) {
+                toast.success(response.data.message, {
+                    position: "top-right",  
+                });
                 console.log(response.data.message);
                 navigate('/AdminDashboard/employees');
               }
