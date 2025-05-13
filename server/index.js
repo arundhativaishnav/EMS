@@ -6,6 +6,7 @@ import departmentRoutes from './routes/departmentRoutes.js'
 import employeeRouter from './routes/employee.js'
 import SalaryRouter from './routes/SalaryRoute.js'
 import LeaveRouter from './routes/LeaveRoute.js'
+import settingRouter from './routes/SettingRoute.js'
 import path from 'path'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname); 
@@ -22,6 +23,7 @@ app.use('/api/department', departmentRoutes)
 app.use('/api/employee', employeeRouter)
 app.use('/api/salary', SalaryRouter)
 app.use('/api/leave', LeaveRouter)
+app.use('/api/settings' ,settingRouter )
 
 
 app.listen(5000 , ()=>{

@@ -35,7 +35,7 @@ const EditEmployee = () => {
           },
         });
 
-        const employee = res.data.employeeId;
+        const employee = res.data.employee;
 
         setFormData({
           name: employee.userId?.name || '',

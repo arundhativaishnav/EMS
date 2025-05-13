@@ -67,8 +67,8 @@ const ViewEmployee = () => {
             { label: "Gender", value: employee.gender },
             { label: "Marital Status", value: employee.maritalStatus },
             { label: "Salary", value: `₹ ${employee.salary}` },
-            { label: "Role", value: employee.userId.role },
-            { label: "Phone Number", value: employee.userId.phone || "N/A" },
+            { label: "Role", value: employee.role },
+            
           ].map((item, idx) => (
             <div key={idx}>
               <p className="text-gray-600 font-semibold">{item.label}:</p>

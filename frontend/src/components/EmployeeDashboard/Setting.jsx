@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Setting = () => {
   const {user} = UseAuth();
   const [formData, setFormData] = useState({
+    name:'' ,
     userId : user._id,
     profilePhoto: null,
     email: '',
@@ -27,7 +28,7 @@ const Setting = () => {
         const { name, email } = res.data.user;
         setFormData((prev) => ({
           ...prev,
-          username: name || '',
+          name : name || '',
           email: email || '',
         }));
       } catch (err) {
@@ -63,8 +64,8 @@ const Setting = () => {
     }
 
     try {
-      const res = await axios.put(
-        'http://localhost:5000/api/setting/chenge-profile',
+      const response = await axios.put(
+        'http://localhost:5000/api/settings/change-profile',
         formDataObj,
         {
           headers: {
@@ -74,7 +75,10 @@ const Setting = () => {
         }
       );
       if(response.data.success){
-        Navigate("/AdminDashboard/employees")
+
+        Navigate("/EmployeeDashboard")
+        toast.success('Profile updated successfully');
+
 
       }
       toast.success(res.data.message || 'Profile updated successfully');
@@ -97,6 +101,7 @@ const Setting = () => {
             className="block w-full text-sm text-gray-500"
           />
         </div>
+        <InputField label="Name" name="name" type="text" value={formData.name} onChange={handleChange} />
         <InputField label="Email" name="email" type="email" value={formData.email} onChange={handleChange} />
         <InputField label="Current Password" name="currentPassword" type="password" value={formData.currentPassword} onChange={handleChange} />
         <InputField label="New Password" name="newPassword" type="password" value={formData.newPassword} onChange={handleChange} />

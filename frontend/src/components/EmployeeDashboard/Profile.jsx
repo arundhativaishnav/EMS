@@ -89,6 +89,7 @@ const ViewEmployee = () => {
           <p className="text-gray-600 font-semibold">Marital Status:</p>
           <p className="text-gray-800 font-medium">{employee.maritalStatus}</p>
         </div>
+        
       </div>
     </div>
   </div>
