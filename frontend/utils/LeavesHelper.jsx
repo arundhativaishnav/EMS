@@ -4,55 +4,55 @@ const columns = [
     {
         name : 'Sr No.',
         selector: row => row.SrNo,
-        width:"70px",
+        width:"100px",
     },
     {
         name : 'Emp ID',
         selector: row =>row.employeeId,
-        width:"120px",
+        width:"140px",
     },
     {
         name : 'Name',
-        selector: row => row.name,
-        width:"150px",
+        selector: row => row.Name,
+        width:"160px",
     },
     {
        name : "Leave Type",
        selector: row => row.leaveType,
-       width:"140px",
+       width:"160px",
     },
     {
        name : "Department",
        selector: row => row.department,
-       width:"140px",
+       width:"160px",
     },
     {
         name : "Days",
         selector: row => row.days,
-        width:"80px",
+        width:"160px",
     },
     {
         name : "Status",
         selector: row => row.status,
-        width:"100px",
+        width:"160px",
     },
     {
         name : "Action",
         selector: row => row.action,
-        width:"100px",
+        width:"200px",
     },
     ];
 
-const LeaveButtons = ({id}) =>{
+const LeaveButtons = ({Id}) =>{
     const navigate = useNavigate();
 
     const handleView = (id) =>{
-        navigate(`/leave/${id}`)
+        navigate(`/AdminDashboard/leaves/${id}`)
     };
     return(
         <button
         className="px-4 py-1 bg-blue-500 rounded text-white hover-bg-blue-600"
-        onClick={() =>handleView(id)}
+        onClick={() =>handleView(Id)}
         >
             View Leave
         </button>

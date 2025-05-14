@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaBuilding, FaCalendar, FaCogs, FaMoneyBillAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
+import { FaBuilding, FaCalendar, FaCogs, FaMoneyBillAlt, FaTachometerAlt, FaUsers ,FaBullhorn } from 'react-icons/fa';
 
 const AdminSidebar = () => {
     const linkClasses = ({ isActive }) =>
@@ -36,6 +36,10 @@ const AdminSidebar = () => {
                 <NavLink to="/admin/settings" className={linkClasses}>
                     <FaCogs />
                     <span>Settings</span>
+                </NavLink>
+                <NavLink to="/AdminDashboard/Announcements" className={linkClasses}>
+                    <FaBullhorn/>
+                    <span>Anouncements</span>
                 </NavLink>
             </div>
         </div>

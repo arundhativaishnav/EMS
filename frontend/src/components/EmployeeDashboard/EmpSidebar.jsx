@@ -23,7 +23,7 @@ const EmpSidebar = () => {
                     <span>My Profile</span>
                 </NavLink>
                
-                <NavLink to="/EmployeeDashboard/leaves" className={linkClasses}>
+                <NavLink to={`/EmployeeDashboard/leaves`} className={linkClasses}>
                     <FaCalendar />
                     <span>Leaves</span>
                 </NavLink>
