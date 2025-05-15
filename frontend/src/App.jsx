@@ -25,6 +25,8 @@ import AddLeave from './components/Leave/AddLeave.jsx';
 import Setting from './components/EmployeeDashboard/Setting.jsx';
 import LeaveTable from './components/Leave/LeaveTable.jsx';
 import LeaveDetail from './components/Leave/LeaveDetail.jsx';
+import AdminSettings from './components/Dashboard/AdminSettings.jsx';
+import AdminAttendance from './components/Dashboard/AdminAttendence.jsx';
 
 import NotificationForm from './components/Notifications/NotificationForm.jsx';
 
@@ -67,6 +69,10 @@ function App() {
             <Route path="leaves" element={< LeaveTable />}/>
             <Route path="leaves/:id" element={<LeaveDetail/>}/>
             <Route path="employees/leaves/:id" element={<LeaveList/>}/>
+            <Route path="settings" element={< AdminSettings/>}/>
+            <Route path="attendance" element={<AdminAttendance />} />
+
+
 
             <Route path="/AdminDashboard/Announcements" element={<NotificationForm />} />
           </Route>
@@ -88,6 +94,8 @@ function App() {
             <Route path="add-Leave" element={<AddLeave/>}/>
             <Route path="salary/:id" element={<ViewSalary/>}/>
             <Route path="settings" element={< Setting/>}/>
+            
+
             
 
 

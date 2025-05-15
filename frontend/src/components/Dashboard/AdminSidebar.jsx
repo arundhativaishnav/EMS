@@ -33,10 +33,15 @@ const AdminSidebar = () => {
                     <FaMoneyBillAlt />
                     <span>Salary</span>
                 </NavLink>
-                <NavLink to="/admin/settings" className={linkClasses}>
+                <NavLink to="/AdminDashboard/settings" className={linkClasses}>
                     <FaCogs />
                     <span>Settings</span>
                 </NavLink>
+                <NavLink to="/AdminDashboard/attendance" className={linkClasses}>
+                <FaCalendar />
+                <span>Attendance</span>
+                </NavLink>
+
                 <NavLink to="/AdminDashboard/Announcements" className={linkClasses}>
                     <FaBullhorn/>
                     <span>Anouncements</span>

@@ -63,7 +63,7 @@ const EmployeeList = () => {
     return (
        <div className="p-5">
   {/* Header */}
-  <div className="text-center mb-6">
+  <div className="text-center ">
     <h3 className="text-3xl font-bold text-gray-800">Manage Employees</h3>
   </div>
 

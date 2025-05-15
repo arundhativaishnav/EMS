@@ -7,6 +7,9 @@ import employeeRouter from './routes/employee.js'
 import SalaryRouter from './routes/SalaryRoute.js'
 import LeaveRouter from './routes/LeaveRoute.js'
 import settingRouter from './routes/SettingRoute.js'
+import DashboardRouter from './routes/DashboardRoute.js'
+import AdminSettingRouter from './routes/AdminSettingRoute.js'
+import attendanceRoutes from "./routes/attendenceRoute.js";
 //import NotificationRouter from './routes/NotificationRoute.js'
 import path from 'path'
 
@@ -25,6 +28,10 @@ app.use('/api/employee', employeeRouter)
 app.use('/api/salary', SalaryRouter)
 app.use('/api/leave', LeaveRouter)
 app.use('/api/settings' ,settingRouter )
+app.use('/api/AdminDashboard', DashboardRouter)
+app.use("/api/users", AdminSettingRouter)
+app.use("/api/attendance", attendanceRoutes);
+
 //app.use('/api/Announcements', NotificationRouter)
 
 
