@@ -49,7 +49,7 @@ const ApplyLeaveForm = () => {
       });
 
       if (response?.data?.message) {
-        navigate('/EmployeeDashboard/leaves');
+        navigate('/EmployeeDashboard/leaves/:id');
       }
     } catch (error) {
       console.error(error.response?.data || error.message || error);

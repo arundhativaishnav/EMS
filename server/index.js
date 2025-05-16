@@ -10,7 +10,7 @@ import settingRouter from './routes/SettingRoute.js'
 import DashboardRouter from './routes/DashboardRoute.js'
 import AdminSettingRouter from './routes/AdminSettingRoute.js'
 import attendanceRoutes from "./routes/attendenceRoute.js";
-//import NotificationRouter from './routes/NotificationRoute.js'
+import NotificationRouter from './routes/NotificationRoute.js'
 import path from 'path'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname); 
@@ -31,8 +31,7 @@ app.use('/api/settings' ,settingRouter )
 app.use('/api/AdminDashboard', DashboardRouter)
 app.use("/api/users", AdminSettingRouter)
 app.use("/api/attendance", attendanceRoutes);
-
-//app.use('/api/Announcements', NotificationRouter)
+app.use('/api/notifications', NotificationRouter)
 
 
 app.listen(5000 , ()=>{

@@ -36,7 +36,7 @@ const AdminSummary = () => {
         return <div> Loading........</div>
     }
     return (
-        <div className='p-6'>
+        <div className='p-6 '>
             <h3 className=' text-2xl font-bold '>Dashboard Overview</h3>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-10'>
                 <SummaryCard icon={<FaUsers/>} text= {"Total Employees"} number ={summary.totalEmployees} color='bg-blue-600'/>

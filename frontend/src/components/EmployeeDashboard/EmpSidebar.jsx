@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaCalendar, FaCogs, FaMoneyBillAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
+import { FaCalendar, FaCogs, FaMoneyBillAlt, FaTachometerAlt, FaUsers , FaBullhorn } from 'react-icons/fa';
 import { UseAuth } from '../../context/authcontext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -54,7 +54,7 @@ const EmpSidebar = () => {
           <FaUsers />
           <span>My Profile</span>
         </NavLink>
-        <NavLink to={`/EmployeeDashboard/leaves`} className={linkClasses}>
+        <NavLink to={`/EmployeeDashboard/leaves/${user._id}`} className={linkClasses}>
           <FaCalendar />
           <span>Leaves</span>
         </NavLink>
@@ -66,6 +66,11 @@ const EmpSidebar = () => {
           <FaCogs />
           <span>Settings</span>
         </NavLink>
+        <NavLink to="/EmployeeDashboard/notifications" className={linkClasses}>
+          <FaBullhorn />
+          <span>Notifications</span>
+        </NavLink>
+
       </div>
 
       {/* Attendance Buttons at Bottom */}

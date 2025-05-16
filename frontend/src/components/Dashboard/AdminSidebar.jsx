@@ -41,11 +41,12 @@ const AdminSidebar = () => {
                 <FaCalendar />
                 <span>Attendance</span>
                 </NavLink>
-
-                <NavLink to="/AdminDashboard/Announcements" className={linkClasses}>
-                    <FaBullhorn/>
-                    <span>Anouncements</span>
+                <NavLink to="/AdminDashboard/notifications" className={linkClasses}>
+                <FaBullhorn />
+                <span>Send Notification</span>
                 </NavLink>
+
+                
             </div>
         </div>
     );

@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { UseAuth } from '../../context/authcontext';
+import { Link, useParams } from 'react-router-dom';
+
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const LeaveList = () => {
-  const { user } = UseAuth();
+  
   const [leave, setLeave] = useState([]);
   let SrNo = 1;
+  const {id} = useParams()
+
   const fetchLeaves = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/leave/${user._id}`, {
+        const response = await axios.get(`http://localhost:5000/api/leave/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
         console.log("Leave fetch response:", response.data);
-        console.log("userId :", user._id);
+        console.log("userId :", id);
         
         
 
-        if (response.data.success) {
+        if (response.data.success== true) {
           setLeave(response.data.leaves);
         } else {
           console.log(error.message)
@@ -35,20 +37,19 @@ const LeaveList = () => {
 
   useEffect(() => {
     
-    if (user?._id) {
-      fetchLeaves();
-    }
-  }, [user]);
+     fetchLeaves();
+    
+  }, []);
 
   return (
-    <div className="p-5">
+    <div className=" p-6">
       {/* Header */}
       <div className="text-center mb-6">
         <h3 className="text-3xl font-bold text-gray-800">Manage Leaves</h3>
       </div>
 
       {/* Apply Leave Button */}
-      <div className="flex justify-end mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
         <Link
           to="/EmployeeDashboard/add-Leave"
           className="px-4 py-2 bg-blue-600 rounded text-white hover:bg-blue-700 transition-colors"

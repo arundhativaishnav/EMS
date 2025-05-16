@@ -65,6 +65,7 @@ const DepartmentList = () => {
         ); 
         setFilteredDepartments(records);
     };
+    
 
     return (
         <div className='p-5'>

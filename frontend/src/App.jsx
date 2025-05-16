@@ -27,8 +27,9 @@ import LeaveTable from './components/Leave/LeaveTable.jsx';
 import LeaveDetail from './components/Leave/LeaveDetail.jsx';
 import AdminSettings from './components/Dashboard/AdminSettings.jsx';
 import AdminAttendance from './components/Dashboard/AdminAttendence.jsx';
+import SendNotification from './components/Notifications/SendNotification.jsx';
+import NotificationList from './components/Notifications/NotificationList';
 
-import NotificationForm from './components/Notifications/NotificationForm.jsx';
 
 function App() {
   return (
@@ -71,11 +72,7 @@ function App() {
             <Route path="employees/leaves/:id" element={<LeaveList/>}/>
             <Route path="settings" element={< AdminSettings/>}/>
             <Route path="attendance" element={<AdminAttendance />} />
-
-
-
-            <Route path="/AdminDashboard/Announcements" element={<NotificationForm />} />
-          </Route>
+            <Route path="notifications" element={<SendNotification />} />            </Route>
         </Route>
 
         {/* ✅ Protected Employee Routes */}
@@ -90,10 +87,11 @@ function App() {
             <Route element={<EmployeeDashboard/>}>
             <Route index element={<SummaryCard />} />
             <Route path="profile/:id" element={<ViewEmployee />} />
-            <Route path="leaves" element={<LeaveList/>}/>
+            <Route path="leaves/:id" element={<LeaveList/>}/>
             <Route path="add-Leave" element={<AddLeave/>}/>
             <Route path="salary/:id" element={<ViewSalary/>}/>
             <Route path="settings" element={< Setting/>}/>
+            <Route path="notifications" element={<NotificationList />} />
             
 
             

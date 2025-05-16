@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 const EmployeeList = () => {
     const [Employees, setEmployees] = useState([]);
     const [Emploading, setEmpLoading] = useState(true);
+    const [filterEmployees , setFilterEmployees] = useState([]);
 
     const fetchEmployees = async () => {
         setEmpLoading(true);
@@ -43,6 +44,7 @@ const EmployeeList = () => {
 
                   
                 setEmployees(info);
+                setFilterEmployees(info)
                 
             }
         } catch (error) {
@@ -60,10 +62,19 @@ const EmployeeList = () => {
         fetchEmployees();
     } , []);
 
+    const filteremployees = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const records = Employees.filter((Employee) =>
+      Employee.Name.toLowerCase().includes(searchTerm)
+    );
+    setFilterEmployees(records);
+  };
+
+
     return (
        <div className="p-5">
   {/* Header */}
-  <div className="text-center ">
+  <div className="text-center mb-6">
     <h3 className="text-3xl font-bold text-gray-800">Manage Employees</h3>
   </div>
 
@@ -73,7 +84,7 @@ const EmployeeList = () => {
       type="text"
       placeholder="Search employee here"
       className="px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-1/2"
-       // Make sure this function is defined
+      onChange={filteremployees}
     />
     <Link
       to="/AdminDashboard/add-Employee"
@@ -87,7 +98,7 @@ const EmployeeList = () => {
   <div className="bg-white rounded-2xl shadow-lg p-6 overflow-x-auto">
     <DataTable
       columns={columns}
-      data={Employees}
+      data={ filterEmployees}
       pagination
       responsive
       highlightOnHover
